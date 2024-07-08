@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let data = [5, 7, 2, 3, 0, 9, 1];
+
+        function getElement() {
+            let el = document.getElementById("element").value;
+
+            if (el >= 0 && el < data.length && typeof parseInt(el) === "number") {
+                alert(data[el]);
+            } else {
+                alert("Enter valid input");
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <form action="" method="post">
+        <input type="text" name="" id="element">
+        <button onclick="getElement()">Get Element</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Insertion</title>
+    <script>
+        /*************************** METHOD 1(by self logic build) *********************/
+
+        // let data = [20, 50, 10, 80, 30, 70];
+        // let newEl = 100;
+        // let position = 2;
+
+        // console.log(data);
+
+        // for (let i = data.length - 1; i >= 0; i--) {
+        //     if (i >= position) {
+        //         data[i + 1] = data[i];
+        //         if (i == position) {
+        //             data[i] = newEl;
+        //         }
+        //     }
+        // }
+        // console.log(data)
+
+
+        /*************************** METHOD 2(Using Function by self logic build) *********************/
+
+        // function insertEl() {
+        //     let data = [20, 50, 10, 80, 30, 70];
+        //     let newEl = parseInt(document.getElementById("newEl").value);
+        //     let position = document.getElementById("position").value;;
+
+        //     console.log(data);
+
+        //     for (let i = data.length - 1; i >= 0; i--) {
+        //         if (i >= position) {
+        //             data[i + 1] = data[i];
+        //             if (i == position) {
+        //                 data[i] = newEl;
+        //             }
+        //         }
+        //     }
+        //     console.log(data)
+        // }
+
+
+        /*************************** METHOD 3(Using By Default Function) *********************/
+
+        let data = [20, 50, 10, 80, 30, 70];
+
+        console.log(data)
+
+        data.splice(1,0,2000);
+
+        console.log(data)
+    </script>
+</head>
+
+<body>
+    <input type="text" placeholder="Enter position" id="position"><br>
+    <input type="text" placeholder="Enter value" id="newEl"><br>
+    <button onclick="insertEl()">Add</button>
+</body>
+
+</html>

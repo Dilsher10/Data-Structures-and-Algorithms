@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // let data = [30, 10, 6, 50, 77, 22, 56];
+        // let item = 77;
+        // let index = 0;
+
+        // for (i = 0; i <= data.length - 1; i++) {
+        //     if (data[i] === item) {
+        //         index = i;
+        //         break;
+        //     }
+        // }
+        // console.log(index);
+
+
+        function searchEl() {
+            let data = [30, 10, 6, 50, 77, 22, 56];
+            let item = parseInt(document.getElementById("element").value);
+            let index = 0;
+
+            for (i = 0; i <= data.length - 1; i++) {
+                if (data[i] === item) {
+                    index = i;
+                    break;
+                }
+            }
+            console.log(index);
+        }
+    </script>
+</head>
+
+<body>
+
+    <input type="text" placeholder="Search number" id="element">
+    <button onclick="searchEl()">Search</button>
+
+</body>
+
+</html>
