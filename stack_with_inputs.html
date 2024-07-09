@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="Enter item" id="item">
+    <button onclick="push()">Add Item</button>
+    <button onclick="pop()">Remove Item</button>
+    <button onclick="display()">Display All Items</button>
+
+    <script>
+        let data = [];
+        let size = data.length;
+        let max = 5;
+
+        function push() {
+            let item = document.getElementById("item").value;
+            if (size >= max) {
+                alert("Stack is full you can not add" + " " + item);
+            } else {
+                data[size] = item;
+                size += 1;
+                document.getElementById("item").value = "";
+                console.log("Item added");
+            }
+        }
+
+
+        function pop() {
+            if (size > 0) {
+                size -= 1;
+                data.length = size;
+                console.log("Item removed");
+            } else {
+                alert("Stack is already empty");
+            }
+        }
+
+
+        function display() {
+            for (i = 0; i < data.length; i++) {
+                console.log(data[i]);
+            }
+        }
+    </script>
+</body>
+
+</html>
