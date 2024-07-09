@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = [];
+        let size = data.length;
+        let max = 5;
+
+        function push(item) {
+            if (size >= max) {
+                alert("Stack is full you can not add" + " " + item);
+            } else {
+                data[size] = item;
+                size += 1;
+            }
+        }
+
+
+        function pop() {
+            if (size > 0) {
+                size -= 1;
+                data.length = size;
+            } else {
+                alert("Stack is already empty");
+            }
+        }
+
+        push(0);
+        push(3);
+        push(1);
+        push(20);
+        push(10);
+
+        console.log(data);
+
+        pop();
+
+        console.log(data);
+    </script>
+</body>
+
+</html>
