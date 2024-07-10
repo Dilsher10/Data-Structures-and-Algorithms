@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let queue = [];
+        let size = queue.length;
+        let max = 5;
+
+        function enqueue(item) {
+            if (size >= max) {
+                alert("Queue is full");
+            } else {
+                queue[size] = item;
+                size++;
+            }
+        }
+
+        function dequeue() {
+            if (size > 0) {
+                for (let i = 0; i < queue.length; i++) {
+                    queue[i] = queue[i + 1];
+                }
+                size--;
+                queue.length = size;
+            } else {
+                alert("Queue is empty");
+            }
+        }
+
+        function display() {
+            console.log(queue)
+        }
+
+        enqueue(10);
+        enqueue(20);
+        enqueue(30);
+        enqueue(40);
+        enqueue(50);
+
+        dequeue()
+
+        display()
+    </script>
+</body>
+
+</html>
