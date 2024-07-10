@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" placeholder="Add item" id="item">
+    <button onclick="enqueue()">Add Item</button>
+    <button onclick="dequeue()">Delete Item</button>
+    <button onclick="front()">Get Front</button>
+    <button onclick="rear()">Get Rear</button>
+    <button onclick="display()">Display</button>
+    
+
+    <script>
+        let queue = [];
+        let size = queue.length;
+        let max = 5;
+
+        function enqueue() {
+            let item = document.getElementById("item").value;
+            if (size >= max) {
+                alert("Queue is full");
+            } else {
+                queue[size] = item;
+                size++;
+                document.getElementById("item").value="";
+            }
+        }
+
+        function dequeue() {
+            if (!isEmpty()) {
+                for (let i = 0; i < queue.length; i++) {
+                    queue[i] = queue[i + 1];
+                }
+                size--;
+                queue.length = size;
+            } else {
+                alert("Queue is empty");
+            }
+        }
+
+        function front() {
+            if (!isEmpty()) {
+                console.log(queue[0]);
+            } else {
+                alert("Queue is empty");
+            }
+        }
+
+        function rear() {
+            if (!isEmpty()) {
+                console.log(queue[size - 1]);
+            } else {
+                alert("Queue is empty");
+            }
+        }
+
+        function isEmpty() {
+            if (size <= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function display() {
+            console.log(queue)
+        }
+    </script>
+</body>
+
+</html>
