@@ -10,12 +10,10 @@
 <body>
     <script>
         function minWindow(s, t) {
-            // If t is an empty string, no window is needed
             if (t === '') return '';
 
-            // Create frequency map for characters in t
-            let countT = {};    // stores how many times each character appears in t
-            let window = {};    // stores how many times each character appears in the current window of s
+            let countT = {};  
+            let window = {};
 
             for (let c of t) {
                 countT[c] = (countT[c] || 0) + 1;
