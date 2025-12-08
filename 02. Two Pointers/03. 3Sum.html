@@ -15,6 +15,8 @@
 
             for (let i = 0; i < nums.length; i++) {
                 if (nums[i] > 0) break;
+
+                // skip duplicates for the first number
                 if (i > 0 && nums[i] === nums[i - 1]) continue;
 
                 let l = i + 1;
@@ -27,11 +29,14 @@
                         l++;
                     } else {
                         res.push([nums[i], nums[l], nums[r]]);
+                        
                         l++;
                         r--;
-                        while (l < r && nums[l] === nums[l - 1]) {
-                            l++;
-                        }
+                        // skip duplicates on left
+                        while (l < r && nums[l] === nums[l - 1]) l++;
+
+                        // skip duplicates on right
+                        while (l < r && nums[r] === nums[r + 1]) r--;
                     }
                 }
             }
