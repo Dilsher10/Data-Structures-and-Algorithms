@@ -17,10 +17,10 @@
 
                 while (stack.length > 0 && temperatures[i] > stack[stack.length - 1][0]) {
                     let [stackTemp, stackInd] = stack.pop();
-                    res[prevIndex] = i - prevIndex;
+                    res[stackInd] = i - stackInd;
                 }
 
-                stack.push(i);
+                stack.push([temperatures[i], i]);
             }
 
             return res;
