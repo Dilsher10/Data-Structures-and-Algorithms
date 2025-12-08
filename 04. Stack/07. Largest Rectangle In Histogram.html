@@ -9,19 +9,34 @@
 
 <body>
     <script>
-
         function largestRectangleArea(heights) {
             let maxArea = 0;
+
+            // This stack will store [index, height] of bars
             const stack = [];
 
-            for (let i = 0; i <= heights.length; i++) {
-                while (stack.length && (i === heights.length || heights[i] <= heights[stack[stack.length - 1]])) {
-                    const height = heights[stack.pop()];
-                    const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
-                    maxArea = Math.max(maxArea, height * width);
+            for (let i = 0; i < heights.length; i++) {
+                // This is where the current bar can start
+                let start = i;
+
+                // If the bar on top of the stack is taller than the current bar,
+                // we cannot stretch that tall bar anymore, so we calculate its area.
+                // Pop all taller bars
+                while (stack.length > 0 && stack[stack.length - 1][1] > heights[i]) {
+                    const [index, height] = stack.pop();
+
+                    // Width = current index - start index of the popped bar
+                    maxArea = Math.max(maxArea, height * (i - index));
+
+                    // The current bar can start where the popped bar started
+                    start = index;
                 }
 
-                stack.push(i);
+                stack.push([start, heights[i]]);
+            }
+
+            for (const [index, height] of stack) {
+                maxArea = Math.max(maxArea, height * (heights.length - index));
             }
 
             return maxArea;
