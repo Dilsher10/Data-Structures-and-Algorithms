@@ -10,23 +10,20 @@
 <body>
     <script>
         function carFleet(target, position, speed) {
-            if (position.length === 0 || speed.length === 0 || target === 0) {
-                return 0;
-            }
-
+            // Make pairs of position and speed
             let pair = position.map((p, i) => [p, speed[i]]);
-            pair.sort((a, b) => b[0] - a[0]);  // sort by position descending
 
+            // Sort pairs by position in descending order
+            pair.sort((a, b) => b[0] - a[0]);
             let stack = [];
 
             for (let [p, s] of pair) {
-                let time = (target - p) / s;
+                // Calculate time, and push into stack
+                stack.push((target - p) / s);
 
-                // Only push if this car doesn't catch up to the car ahead
-                if (stack.length === 0 || time > stack[stack.length - 1]) {
-                    stack.push(time);
+                if (stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
+                    stack.pop();
                 }
-                // else: it catches up, becomes part of the same fleet
             }
 
             return stack.length;
