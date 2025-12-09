@@ -16,13 +16,14 @@
 
             while (l <= r) {
                 const k = Math.floor((l + r) / 2);
+                let hours = 0;
 
-                let totalTime = 0;
                 for (const p of piles) {
-                    totalTime += Math.ceil(p / k);
+                    hours += Math.ceil(p / k);
                 }
-                if (totalTime <= h) {
-                    res = k;
+
+                if (hours <= h) {
+                    res = Math.min(res, k);
                     r = k - 1;
                 } else {
                     l = k + 1;
