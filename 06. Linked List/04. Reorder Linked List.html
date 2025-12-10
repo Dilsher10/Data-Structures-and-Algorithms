@@ -10,12 +10,7 @@
 <body>
     <script>
         function reorderList(head) {
-
-            if (head == null || head.next == null || head.next.next == null) {
-                return;
-            }
-
-            // Step 1: Use two pointers (slow and fast) to find the middle of the list
+            // 1. Find middle
             let slow = head;
             let fast = head.next;
             while (fast !== null && fast.next !== null) {
@@ -23,36 +18,24 @@
                 fast = fast.next.next;
             }
 
-            // second now points to the start of the second half
-            let secondHead = slow.next;
-
-            // Detach the two linked list, means break the list into two halves
-            slow.next = null
-
-
-
-            // Step 2: Reverse the second half of the list
-            let current = secondHead;
-            let prev = null;
-            while (current !== null) {
-                const next = current.next;
-                current.next = prev;
-                prev = current;
-                current = next;
+            // 2. Reverse second half
+            let second = slow.next;
+            let prev = (slow.next = null);
+            while (second !== null) {
+                const tmp = second.next;
+                second.next = prev;
+                prev = second;
+                second = tmp;
             }
 
-
-
-            // Step 3: Merge the two halves
+            // 3. Merge
             let first = head;
-            let second = prev;
+            second = prev;
             while (second !== null) {
                 const tmp1 = first.next;
                 const tmp2 = second.next;
-
                 first.next = second;
                 second.next = tmp1;
-
                 first = tmp1;
                 second = tmp2;
             }
