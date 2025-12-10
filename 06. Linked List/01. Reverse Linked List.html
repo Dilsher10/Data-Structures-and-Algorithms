@@ -13,7 +13,7 @@
             let prev = null;
             let curr = head;
 
-            while (current !== null) {
+            while (curr) {
                 const nextNode = current.next; // store next node
                 current.next = prev;           // reverse the link
                 prev = current;                // move prev to current
