@@ -13,13 +13,13 @@
             let slow = nums[0];
             let fast = nums[0];
 
-            // Phase 1: Detect the cycle
+            // Phase 1: Find intersection point
             do {
                 slow = nums[slow];
                 fast = nums[nums[fast]];
             } while (slow !== fast);
 
-            // Phase 2: Find the entrance to the cycle (duplicate number)
+            // Phase 2: Find entrance to the cycle (duplicate number)
             slow = nums[0];
             while (slow !== fast) {
                 slow = nums[slow];
