@@ -17,10 +17,7 @@
 
                 for (let i = 0; i < lists.length; i += 2) {
                     const l1 = lists[i];
-                    // Get the next list if it exists, otherwise use null
                     const l2 = i + 1 < lists.length ? lists[i + 1] : null;
-
-                    // Merge the two lists and add the result to the mergedLists array
                     mergedLists.push(mergeList(l1, l2));
                 }
 
