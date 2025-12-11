@@ -46,11 +46,10 @@
 
             // insert node after head
             insert(node) {
-                const first = this.head.next;  // old first node
-                node.next = first;             // new node points forward to old first node
-                node.prev = this.head;         // new node points back to head
-                this.head.next = node;         // head points to new node
-                first.prev = node;             // old first node points back to new node
+                node.next = this.head.next;
+                node.prev = this.head;
+                this.head.next.prev = node;
+                this.head.next = node;
             }
 
 
@@ -64,7 +63,11 @@
 
             put(key, value) {
                 if (this.cache.has(key)) {
-                    this.remove(this.cache.get(key));
+                    const node = this.cache.get(key);
+                    node.val = value;       // Update value
+                    this.remove(node);
+                    this.insert(node);      // Move to MRU
+                    return;
                 }
 
                 const node = new Node(key, value);
