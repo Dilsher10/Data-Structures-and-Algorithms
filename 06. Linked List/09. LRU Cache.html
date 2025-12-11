@@ -46,11 +46,13 @@
 
             // insert node after head
             insert(node) {
-                node.next = this.head.next;  // new node points forward to old first node
-                node.prev = this.head;       // and backward to head
-                this.head.next = node;       // head now points forward to new node
-                this.head.next.prev = node;  // old first node points back to new node
+                const first = this.head.next;  // old first node
+                node.next = first;             // new node points forward to old first node
+                node.prev = this.head;         // new node points back to head
+                this.head.next = node;         // head points to new node
+                first.prev = node;             // old first node points back to new node
             }
+
 
             get(key) {
                 if (!this.cache.has(key)) return -1;
