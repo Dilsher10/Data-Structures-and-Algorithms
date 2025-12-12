@@ -10,23 +10,23 @@
 <body>
     <script>
         function diameterOfBinaryTree(root) {
-            let maxDiameter = 0;
+            let diameter = 0;
 
             const dfs = (node) => {
-                if (node === null) return 0;
+                if (!node) return 0;
 
                 const left = dfs(node.left);
                 const right = dfs(node.right);
 
                 // Update the max diameter at this node
-                maxDiameter = Math.max(maxDiameter, left + right);
+                diameter = Math.max(diameter, left + right);
 
                 // return height of this node
                 return 1 + Math.max(left, right);
             }
 
             dfs(root);
-            return maxDiameter;
+            return diameter;
         };
     </script>
 </body>
