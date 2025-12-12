@@ -9,24 +9,24 @@
 
 <body>
     <script>
-        function isBalanced(root) {
-            function dfs(node) {
-                if (node === null) return 0;
-
-                const left = dfs(node.left);
-                if (left === -1) return -1;
-
-                const right = dfs(node.right);
-                if (right === -1) return -1;
-
-                if (Math.abs(left - right) > 1) {
-                    return -1;
-                }
-
-                return 1 + Math.max(left, right);
+        class Solution {
+            isBalanced(root) {
+                return this.dfs(root)[0] === 1;
             }
 
-            return dfs(root) !== -1;
+            dfs(root) {
+                if (!root) {
+                    return [1, 0];
+                }
+
+                const left = this.dfs(root.left);
+                const right = this.dfs(root.right);
+
+                const balanced = left[0] === 1 && right[0] === 1 && Math.abs(left[1] - right[1]) <= 1;
+                const height = 1 + Math.max(left[1], right[1]);
+
+                return [balanced ? 1 : 0, height];
+            }
         }
     </script>
 </body>
