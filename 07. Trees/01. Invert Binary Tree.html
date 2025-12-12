@@ -12,8 +12,7 @@
         // Method 1: Depth First Search
         function invertTree(root) {
             if (!root) return null;
-
-            // Swap the left and right children
+            
             const temp = root.left;
             root.left = root.right;
             root.right = temp;
