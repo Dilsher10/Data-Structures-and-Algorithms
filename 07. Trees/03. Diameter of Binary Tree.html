@@ -15,13 +15,17 @@
             const dfs = (node) => {
                 if (!node) return 0;
 
+                // height of left subtree
                 const left = dfs(node.left);
+
+                // height of right subtree
                 const right = dfs(node.right);
 
-                // Update the max diameter at this node
+                // Longest path through node = left + right
+                // Track the max of these values in diameter
                 diameter = Math.max(diameter, left + right);
 
-                // return height of this node
+                // Return height upward to parent
                 return 1 + Math.max(left, right);
             }
 
