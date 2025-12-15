@@ -19,11 +19,14 @@
                     return true;
                 }
                 
-                // 5 < 4 < 7 : This is invalid
+                // 5 < 4 < 7 : This is invalid. 
+                // 3 < 5 < 7 : This line ckecks that every left node less that root and every right node greater than root.
+                // If this condition is True then we go to left and right node otherwise not.
                 if (!(left < node.val && node.val < right)) {
                     return false;
                 }
 
+                
                 return (
                     this.valid(node.left, left, node.val) &&
                     this.valid(node.right, node.val, right)
