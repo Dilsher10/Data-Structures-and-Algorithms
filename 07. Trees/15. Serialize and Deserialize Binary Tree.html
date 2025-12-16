@@ -31,11 +31,11 @@
                     const node = queue.pop();
                     if (!node) {
                         res.push('N');
+                    } else {
+                        res.push(node.val);
+                        queue.push(node.left);
+                        queue.push(node.right);
                     }
-
-                    res.push(node.val);
-                    queue.push(node.left);
-                    queue.push(node.right);
                 }
                 return res.join(',');
             }
