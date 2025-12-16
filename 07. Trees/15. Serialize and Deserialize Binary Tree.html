@@ -9,8 +9,67 @@
 
 <body>
     <script>
+        class TreeNode {
+            constructor(val = 0, left = null, right = null) {
+                this.val = val;
+                this.left = left;
+                this.right = right;
+            }
+        }
+
+
+
+        // Method: 1
         class Codec {
-            // Converts a binary tree into a single string.
+            serialize(root) {
+                if (!root) return 'N';
+                const res = [];
+                const queue = new Queue();
+                queue.push(root);
+
+                while (!queue.isEmpty()) {
+                    const node = queue.pop();
+                    if (!node) {
+                        res.push('N');
+                    } else {
+                        res.push(node.val);
+                        queue.push(node.left);
+                        queue.push(node.right);
+                    }
+                }
+                return res.join(',');
+            }
+
+            deserialize(data) {
+                const vals = data.split(',');
+                if (vals[0] === 'N') return null;
+                const root = new TreeNode(parseInt(vals[0]));
+                const queue = new Queue([root]);
+                let index = 1;
+
+                while (!queue.isEmpty()) {
+                    const node = queue.pop();
+                    if (vals[index] !== 'N') {
+                        node.left = new TreeNode(parseInt(vals[index]));
+                        queue.push(node.left);
+                    }
+                    index++;
+                    if (vals[index] !== 'N') {
+                        node.right = new TreeNode(parseInt(vals[index]));
+                        queue.push(node.right);
+                    }
+                    index++;
+                }
+                return root;
+            }
+        }
+
+
+
+
+
+        // Method: 2
+        class Codec {
             serialize(root) {
                 const res = [];
 
@@ -28,8 +87,6 @@
                 return res.join(',');
             }
 
-
-            // Reconstructs a tree from the serialized string.
             deserialize(data) {
                 const vals = data.split(',');
                 let index = 0;
