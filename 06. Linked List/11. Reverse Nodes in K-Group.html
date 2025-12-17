@@ -27,8 +27,8 @@
 
 
                 // Step 2: Reverse the group
-                let prev = kth.next;
                 let curr = prevGroupTail.next;
+                let prev = kth.next;
                 while (curr != nextGroupStart) {
                     const tmp = curr.next;
                     curr.next = prev;
