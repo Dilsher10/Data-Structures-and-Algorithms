@@ -16,10 +16,13 @@
 
             while (true) {
                 // Step 1: Find kth Node
-                const kth = this.getKth(prevGroupTail, k);
-                if (!kth) {
-                    break;
+                const kth = prevGroupTail;
+                let count = k;
+                while (count > 0 && kth) {
+                    kth = kth.next;
+                    count--;
                 }
+                if (!kth) break;
                 const nextGroupStart = kth.next;
 
 
