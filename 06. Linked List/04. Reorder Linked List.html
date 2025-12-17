@@ -10,36 +10,43 @@
 <body>
     <script>
         function reorderList(head) {
-            // 1. Find middle
+            if (!head || !head.next) return;
+
+            // 1. Find middle of the list
             let slow = head;
-            let fast = head.next;
-            while (fast !== null && fast.next !== null) {
+            let fast = head;
+            while (fast && fast.next) {
                 slow = slow.next;
                 fast = fast.next.next;
             }
 
             // 2. Reverse second half
-            let second = slow.next;
-            let prev = (slow.next = null);
-            while (second !== null) {
-                const tmp = second.next;
-                second.next = prev;
-                prev = second;
-                second = tmp;
+            let curr = slow.next;
+            slow.next = null; // split list
+            let prev = null;
+
+            while (curr) {
+                let temp = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = temp;
             }
 
-            // 3. Merge
+            // 3. Merge two halves
             let first = head;
-            second = prev;
-            while (second !== null) {
-                const tmp1 = first.next;
-                const tmp2 = second.next;
+            let second = prev;
+
+            while (second) {
+                let temp1 = first.next;
+                let temp2 = second.next;
+
                 first.next = second;
-                second.next = tmp1;
-                first = tmp1;
-                second = tmp2;
+                second.next = temp1;
+
+                first = temp1;
+                second = temp2;
             }
-        }
+        };
     </script>
 </body>
 
