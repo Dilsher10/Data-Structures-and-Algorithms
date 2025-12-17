@@ -9,39 +9,37 @@
 
 <body>
     <script>
-        class Solution {
-            reverseKGroup(head, k) {
-                const dummy = new ListNode(0, head);
-                let prevGroupTail = dummy;
+        function reverseKGroup(head, k) {
+            const dummy = new ListNode(0, head);
+            let prevGroupTail = dummy;
 
-                while (true) {
-                    // Step 1: Find kth Node
-                    const kth = this.getKth(prevGroupTail, k);
-                    if (!kth) {
-                        break;
-                    }
-                    const nextGroupStart = kth.next;
-
-
-                    // Step 2: Reverse the group
-                    let prev = kth.next;
-                    let curr = prevGroupTail.next;
-                    while (curr != nextGroupStart) {
-                        const tmp = curr.next;
-                        curr.next = prev;
-                        prev = curr;
-                        curr = tmp;
-                    }
+            while (true) {
+                // Step 1: Find kth Node
+                const kth = this.getKth(prevGroupTail, k);
+                if (!kth) {
+                    break;
+                }
+                const nextGroupStart = kth.next;
 
 
-                    // Step 3: Reconnect the reversed group
-                    const tmp = prevGroupTail.next;
-                    prevGroupTail.next = kth;
-                    prevGroupTail = tmp;
+                // Step 2: Reverse the group
+                let prev = kth.next;
+                let curr = prevGroupTail.next;
+                while (curr != nextGroupStart) {
+                    const tmp = curr.next;
+                    curr.next = prev;
+                    prev = curr;
+                    curr = tmp;
                 }
 
-                return dummy.next;
+
+                // Step 3: Reconnect the reversed group
+                const tmp = prevGroupTail.next;
+                prevGroupTail.next = kth;
+                prevGroupTail = tmp;
             }
+
+            return dummy.next;
         }
     </script>
 </body>
