@@ -10,7 +10,8 @@
 <body>
     <script>
         function reverseKGroup(head, k) {
-            const dummy = new ListNode(0, head);
+            const dummy = new ListNode(0);
+            dummy.next = head;
             let prevGroupTail = dummy;
 
             while (true) {
