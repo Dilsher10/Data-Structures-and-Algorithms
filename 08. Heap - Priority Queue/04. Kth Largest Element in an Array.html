@@ -9,6 +9,53 @@
 
 <body>
     <script>
+        // Optimal 
+        function findKthLargest(nums, k) {
+            // Convert k-th largest to (n - k)-th smallest
+            k = nums.length - k;
+
+            // Quickselect helper function
+            const quickSelect = (left, right) => {
+                // Choose the rightmost element as pivot
+                let pivot = nums[right];
+
+                // Pointer for the "smaller than pivot" region
+                let p = left;
+
+                // Partition the array
+                for (let i = left; i < right; i++) {
+                    // If current element is less than or equal to pivot
+                    if (nums[i] <= pivot) {
+                        // Swap current element with pointer position
+                        [nums[p], nums[i]] = [nums[i], nums[p]];
+                        p++;
+                    }
+                }
+
+                // Place pivot in its correct sorted position
+                [nums[p], nums[right]] = [nums[right], nums[p]];
+
+                // Recurse into the side that contains the k-th element
+                if (p > k) {
+                    // Target is in the left partition
+                    return quickSelect(left, p - 1);
+                } else if (p < k) {
+                    // Target is in the right partition
+                    return quickSelect(p + 1, right);
+                } else {
+                    // Found the k-th smallest (k-th largest originally)
+                    return nums[p];
+                }
+            };
+
+            // Start quickselect on the full array
+            return quickSelect(0, nums.length - 1);
+        }
+
+
+
+
+        // Better
         function findKthLargest(nums, k) {
             const minHeap = new MinPriorityQueue();
 
@@ -21,6 +68,13 @@
             }
 
             return minHeap.front();
+        }
+
+
+
+        // Brute force
+        function findKthLargest(nums, k){
+            
         }
     </script>
 </body>
