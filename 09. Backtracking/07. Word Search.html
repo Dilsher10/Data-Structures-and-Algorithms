@@ -11,22 +11,16 @@
     <script>
         class Solution {
             exist(board, word) {
-                const ROWS = board.length;         // Number of rows in the board
-                const COLS = board[0].length;      // Number of columns in the board
-                const path = new Set();            // Set to track the visited cells in the current DFS path
+                const ROWS = board.length;
+                const COLS = board[0].length;
+                const path = new Set();
 
-                // Depth-First Search (DFS) helper function
                 const dfs = (r, c, i) => {
                     // Base case: if all characters in the word are matched
                     if (i === word.length) return true;
 
                     // Check boundaries, character match, and if cell has already been visited
-                    if (
-                        r < 0 || c < 0 ||           // Out of top/left boundary
-                        r >= ROWS || c >= COLS ||   // Out of bottom/right boundary
-                        board[r][c] !== word[i] ||  // Character does not match
-                        path.has(`${r},${c}`)       // Cell already used in current path
-                    ) {
+                    if (r < 0 || c < 0 || r >= ROWS || c >= COLS || word[i] !== board[r][c] || path.has(`${r},${c}`)) {
                         return false;
                     }
 
