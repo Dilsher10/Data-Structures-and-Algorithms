@@ -22,10 +22,8 @@
                 }
 
                 path.add(`${r},${c}`);
-
                 const res = dfs(r + 1, c, i + 1) || dfs(r - 1, c, i + 1) || dfs(r, c + 1, i + 1) || dfs(r, c - 1, i + 1);
-
-                path.delete(`${r},${c}`);
+                path.delete(`${r},${c}`); // Backtrack: unmark this cell before returning
                 return res;
             };
 
@@ -38,6 +36,14 @@
 
             return false;
         }
+
+        board = [
+            ["A", "B", "C", "D"],
+            ["S", "A", "A", "T"],
+            ["A", "C", "A", "E"]
+        ];
+        word = "CAT";
+        console.log(exist(board, word)); 
     </script>
 </body>
 
