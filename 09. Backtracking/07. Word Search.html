@@ -9,13 +9,12 @@
 
 <body>
     <script>
-        exist(board, word) {
+        function exist(board, word) {
             const ROWS = board.length;
             const COLS = board[0].length;
             const path = new Set();
 
             const dfs = (r, c, i) => {
-                // Base case: if all characters in the word are matched
                 if (i === word.length) return true;
 
                 if (r < 0 || c < 0 || r >= ROWS || c >= COLS || word[i] !== board[r][c] || path.has(`${r},${c}`)) {
@@ -24,12 +23,7 @@
 
                 path.add(`${r},${c}`);
 
-                const res =
-                    dfs(r + 1, c, i + 1) ||     // Down
-                    dfs(r - 1, c, i + 1) ||     // Up
-                    dfs(r, c + 1, i + 1) ||     // Right
-                    dfs(r, c - 1, i + 1);       // Left
-
+                const res = dfs(r + 1, c, i + 1) || dfs(r - 1, c, i + 1) || dfs(r, c + 1, i + 1) || dfs(r, c - 1, i + 1);
 
                 path.delete(`${r},${c}`);
                 return res;
