@@ -17,7 +17,7 @@
             const dfs = (r, c, i) => {
                 if (i === word.length) return true;
 
-                if (r < 0 || c < 0 || r >= ROWS || c >= COLS || word[i] !== board[r][c] || path.has(`${r},${c}`)) {
+                if (r < 0 || c < 0 || r >= ROWS || c >= COLS || board[r][c] !== word[i] || path.has(`${r},${c}`)) {
                     return false;
                 }
 
