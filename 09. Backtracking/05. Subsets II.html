@@ -9,7 +9,36 @@
 
 <body>
     <script>
-        
+        function subsetsWithDup(nums) {
+            nums.sort((a, b) => a - b);
+            const res = [];
+
+            const dfs = (i, cur) => {
+                // Base case
+                if (i === nums.length) {
+                    res.push([...cur]);
+                    return;
+                }
+
+                // Decision 1: INCLUDE nums[i]
+                cur.push(nums[i]);                // add current element
+                dfs(i + 1, cur);                  // move to next index
+                cur.pop();                        // backtrack
+
+
+                // Decision 2: EXCLUDE nums[i]
+                // Skip all duplicates of nums[i]
+                while (i + 1 < nums.length && nums[i] === nums[i + 1]) {
+                    i++
+                }
+
+                // Recurse after skipping duplicates
+                dfs(i + 1, cur);
+            }
+
+            dfs(0, []);
+            return res;
+        }
     </script>
 </body>
 
