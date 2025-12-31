@@ -9,7 +9,27 @@
 
 <body>
     <script>
-        
+        function subsets(nums) {
+            const res = [];
+
+            const dfs = (i, cur) => {
+                if (i === nums.length) {
+                    res.push([...cur]);
+                    return;
+                }
+
+                // decision to include nums[i]
+                cur.push(nums[i]);
+                dfs(i + 1, cur);
+
+                // decision not to include nums[i]
+                cur.pop();
+                dfs(i + 1, cur);
+            };
+
+            dfs(0, []);
+            return res;
+        }
     </script>
 </body>
 
