@@ -13,9 +13,9 @@
             const result = [];
             const used = new Array(nums.length).fill(false);
 
-            function backtrack(path) {
-                if (path.length === nums.length) {
-                    result.push([...path]);
+            function backtrack(cur) {
+                if (cur.length === nums.length) {
+                    result.push([...cur]);
                     return;
                 }
 
@@ -23,16 +23,16 @@
                     if (used[i]) continue;
 
                     // Choose a number
-                    path.push(nums[i]);
+                    cur.push(nums[i]);
 
                     // We mark it as used
                     used[i] = true;
 
                     // Explore all permutations of picked number
-                    backtrack(path, used);
+                    backtrack(cur, used);
 
                     // Un-choose (backtrack)
-                    path.pop();
+                    cur.pop();
                     used[i] = false;
                 }
             }
