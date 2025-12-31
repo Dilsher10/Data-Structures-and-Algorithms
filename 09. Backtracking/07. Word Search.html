@@ -19,35 +19,31 @@
                     // Base case: if all characters in the word are matched
                     if (i === word.length) return true;
 
-                    // Check boundaries, character match, and if cell has already been visited
                     if (r < 0 || c < 0 || r >= ROWS || c >= COLS || word[i] !== board[r][c] || path.has(`${r},${c}`)) {
                         return false;
                     }
 
-                    // Mark the cell as visited
                     path.add(`${r},${c}`);
 
-                    // Explore all 4 directions: down, up, right, left
                     const res =
                         dfs(r + 1, c, i + 1) ||     // Down
                         dfs(r - 1, c, i + 1) ||     // Up
                         dfs(r, c + 1, i + 1) ||     // Right
                         dfs(r, c - 1, i + 1);       // Left
 
-                    // Backtrack: unmark the cell as visited
-                    path.delete(`${r},${c}`);
 
+                    path.delete(`${r},${c}`);
                     return res;
                 };
 
-                // Try to start DFS from every cell in the grid
+       
                 for (let r = 0; r < ROWS; r++) {
                     for (let c = 0; c < COLS; c++) {
-                        if (dfs(r, c, 0)) return true;  // If DFS finds the word, return true
+                        if (dfs(r, c, 0)) return true; 
                     }
                 }
 
-                return false;  // Word not found in any path
+                return false; 
             }
         }
     </script>
