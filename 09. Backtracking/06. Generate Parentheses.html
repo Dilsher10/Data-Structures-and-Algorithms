@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Parentheses</title>
 </head>
+
 <body>
-    
+    <script>
+        function generateParenthesis(n) {
+            const res = [];
+
+            const backtrack = (cur, openN, closedN) => {
+                if (openN === closedN && openN === n) {
+                    res.push(cur.join(""));
+                    return;
+                }
+
+                if (openN < n) {
+                    cur.push("(");
+                    backtrack(cur, openN + 1, closedN);
+                    cur.pop();
+                }
+
+                if (closedN < openN) {
+                    cur.push(")");
+                    backtrack(cur, openN, closedN + 1);
+                    cur.pop();
+                }
+            }
+
+            backtrack([], 0, 0);
+            return res;
+        }
+
+        n = 3;
+        console.log(generateParenthesis(n));
+    </script>
 </body>
+
 </html>
