@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permutations</title>
+</head>
+
+<body>
+    <script>
+        function permute(nums) {
+            const res = [];
+
+            const dfs = (i) => {
+                if (i === nums.length) {
+                    res.push([...nums]);
+                    return;
+                }
+
+                for (let j = i; j < nums.length; j++) {
+                    // swap nums[i] and nums[j]
+                    [nums[i], nums[j]] = [nums[j], nums[i]];
+
+                    dfs(i + 1);
+
+                    // backtrack (swap back)
+                    [nums[i], nums[j]] = [nums[j], nums[i]];
+                }
+            };
+
+            dfs(0);
+            return res;
+        }
+
+        nums = [1, 2, 3]
+        console.log(permute(nums));
+    </script>
+</body>
+
+</html>
