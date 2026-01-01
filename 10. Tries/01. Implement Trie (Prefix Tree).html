@@ -12,7 +12,7 @@
         class TrieNode {
             constructor() {
                 this.children = new Map();
-                this.endOfWord = false; 
+                this.endOfWord = false;
             }
         }
 
@@ -66,8 +66,6 @@
                 // All characters of the prefix found
                 return true;
             }
-
-
         }
 
 
@@ -83,7 +81,6 @@
         console.log(trie.search("app"));      // true
         console.log(trie.startsWith("ap"));   // true
         console.log(trie.startsWith("banana")); // false
-
     </script>
 </body>
 
