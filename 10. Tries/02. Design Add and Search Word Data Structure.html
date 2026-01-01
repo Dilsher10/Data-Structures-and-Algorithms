@@ -11,12 +11,12 @@
     <script>
         class TrieNode {
             constructor() {
-                this.children = new Map();  
-                this.word = false;        
+                this.children = new Map();
+                this.word = false;
             }
         }
 
-       
+
         class WordDictionary {
             constructor() {
                 this.root = new TrieNode();
@@ -35,41 +35,30 @@
 
 
             search(word) {
-                return this.dfs(word, 0, this.root);
-            }
+                const dfs = (i, node) => {
+                    if (i === word.length) {
+                        return node.word;
+                    }
 
-
-            // Recursive depth-first search to handle '.' wildcards
-            dfs(word, index, node) {
-
-                let cur = node;
-
-                for (let i = index; i < word.length; i++) {
                     const c = word[i];
 
-                    // If character is '.', check all possible children
                     if (c === '.') {
-                        for (const child of cur.children.values()) {
-                            // Recurse for each child; if any path returns true, word exists
-                            if (this.dfs(word, i + 1, child)) {
+                        for (const child of node.children.values()) {
+                            if (dfs(i + 1, child)) {
                                 return true;
                             }
                         }
-                        // No matching paths found for wildcard
                         return false;
+                    } else {
+                        if (!node.children.has(c)) {
+                            return false;
+                        }
+                        node = node.children.get(c);
+                        return dfs(i + 1, node);
                     }
-
-                    // If character doesn't exist in children, word doesn't exist
-                    if (!cur.children.has(c)) {
-                        return false;
-                    }
-
-                    // Move to the next child node
-                    cur = cur.children.get(c);
                 }
 
-                // Return true only if we end on a node that marks the end of a word
-                return cur.word;
+                return dfs(0, this.root);
             }
         }
 
