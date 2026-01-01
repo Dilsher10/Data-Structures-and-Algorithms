@@ -10,9 +10,8 @@
 <body>
     <script>
         function letterCombinations(digits) {
+            if (!digits || digits.length === 0) return [];
             let res = [];
-
-            if (digits.length === 0) return res;
 
             const digitToChar = {
                 2: 'abc',
@@ -20,19 +19,19 @@
                 4: 'ghi',
                 5: 'jkl',
                 6: 'mno',
-                7: 'qprs',
+                7: 'pqrs',
                 8: 'tuv',
                 9: 'wxyz',
             };
 
-            const backtrack = (i, curStr) => {
-                if (curStr.length === digits.length) {
-                    res.push(curStr);
+            const backtrack = (i, cur) => {
+                if (i === digits.length) {
+                    res.push(cur);
                     return;
                 }
 
-                for (const c of digitToChar[digits[i]]) {
-                    backtrack(i + 1, curStr + c);
+                for (const ch of digitToChar[digits[i]]) {
+                    backtrack(i + 1, cur + ch);
                 }
             };
 
