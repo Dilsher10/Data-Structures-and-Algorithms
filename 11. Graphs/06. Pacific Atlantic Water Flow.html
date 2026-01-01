@@ -7,8 +7,7 @@
 </head>
 <body>
     <script>
-        // Method: 1
-        var pacificAtlantic = function (heights) {
+        function pacificAtlantic(heights) {
             if (!heights || heights.length === 0 || heights[0].length === 0) return [];
 
             const rows = heights.length;
@@ -17,24 +16,19 @@
             const atlantic = new Set();
             const result = [];
 
-            const dfs = (r, c, visited, prevHeight) => {
-                const key = `${r},${c}`;
+            const dfs = (r, c, ocean, prevHeight) => {
+                if (r < 0 || c < 0 || r >= rows || c >= cols || visited.has(`${r},${c}`) || heights[r][c] < prevHeight) {
+                    return
+                }
 
-                if (
-                    r < 0 || c < 0 || r >= rows || c >= cols ||
-                    visited.has(key) ||
-                    heights[r][c] < prevHeight
-                ) return;
+                ocean.add(`${r},${c}`);
 
-                visited.add(key);
-
-                dfs(r + 1, c, visited, heights[r][c]);
-                dfs(r - 1, c, visited, heights[r][c]);
-                dfs(r, c + 1, visited, heights[r][c]);
-                dfs(r, c - 1, visited, heights[r][c]);
+                dfs(r + 1, c, ocean, heights[r][c]);
+                dfs(r - 1, c, ocean, heights[r][c]);
+                dfs(r, c + 1, ocean, heights[r][c]);
+                dfs(r, c - 1, ocean, heights[r][c]);
             };
             
-
             for (let c = 0; c < cols; c++) {
                 dfs(0, c, pacific, heights[0][c]); // top edge (Pacific)
                 dfs(rows - 1, c, atlantic, heights[rows - 1][c]); // bottom edge (Atlantic)
@@ -57,78 +51,12 @@
             return result;
         };
 
-
-        
-
-        // Method: 2
-        class Solution {
-
-            pacificAtlantic(heights) {
-                const ROWS = heights.length;
-                const COLS = heights[0].length;
-
-                // Use Set to track visited positions as "r,c" strings
-                const pac = new Set();
-                const atl = new Set();
-
-                // DFS function using sets
-                const dfs = (r, c, visited, prevHeight) => {
-                    const key = `${r},${c}`;
-
-                    // Boundary and validity checks
-                    if (
-                        r < 0 || r >= ROWS ||
-                        c < 0 || c >= COLS ||
-                        visited.has(key) ||
-                        heights[r][c] < prevHeight
-                    ) {
-                        return;
-                    }
-
-                    // Mark this cell as visited
-                    visited.add(key); 
-
-                    // Explore all directions
-                    dfs(r + 1, c, visited, heights[r][c]);
-                    dfs(r - 1, c, visited, heights[r][c]);
-                    dfs(r, c + 1, visited, heights[r][c]);
-                    dfs(r, c - 1, visited, heights[r][c]);
-                };
-
-                // Start DFS from Pacific Ocean borders
-                for (let c = 0; c < COLS; c++) {
-                    dfs(0, c, pac, heights[0][c]);             // Top row
-                    dfs(ROWS - 1, c, atl, heights[ROWS - 1][c]); // Bottom row
-                }
-
-                for (let r = 0; r < ROWS; r++) {
-                    dfs(r, 0, pac, heights[r][0]);             // Left column
-                    dfs(r, COLS - 1, atl, heights[r][COLS - 1]); // Right column
-                }
-
-                // Build result from overlapping visited cells
-                const res = [];
-                for (let r = 0; r < ROWS; r++) {
-                    for (let c = 0; c < COLS; c++) {
-                        const key = `${r},${c}`;
-                        if (pac.has(key) && atl.has(key)) {
-                            res.push([r, c]);
-                        }
-                    }
-                }
-
-                return res;
-            }
-        }
-
         const heights = [
             [4, 2, 7, 3, 4],
             [7, 4, 6, 4, 7],
             [6, 3, 5, 3, 6]
         ];
-        const solution = new Solution();
-        const result = solution.pacificAtlantic(heights);
-        console.log(result);
+        console.log(pacificAtlantic(heights));
     </script>
 </body>
 </html>
