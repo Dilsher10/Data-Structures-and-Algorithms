@@ -22,7 +22,6 @@
                 this.root = new TrieNode();
             }
 
-
             insert(word) {
                 let cur = this.root;
                 for (let c of word) {
@@ -37,7 +36,6 @@
                 cur.endOfWord = true;
             }
 
-
             search(word) {
                 let cur = this.root;
                 for (let c of word) {
@@ -51,7 +49,6 @@
                 // Return true only if it's the end of a complete word
                 return cur.endOfWord;
             }
-
 
             startsWith(prefix) {
                 let cur = this.root;
