@@ -22,8 +22,6 @@
                 this.root = new TrieNode();
             }
 
-
-
             // Inserts a word into the Trie
             insert(word) {
                 let cur = this.root;
@@ -38,9 +36,6 @@
                 // Mark the end of the word
                 cur.endOfWord = true;
             }
-
-
-
 
             // Searches for a complete word in the Trie
             search(word) {
@@ -58,9 +53,6 @@
             }
 
 
-
-
-            // Checks if any word in the Trie starts with the given prefix
             startsWith(prefix) {
                 let cur = this.root;
                 for (let c of prefix) {
@@ -77,11 +69,6 @@
 
 
         }
-
-
-
-
-
 
 
         // Test the PrefixTree
