@@ -22,7 +22,7 @@
                 this.root = new TrieNode();
             }
 
-            // Inserts a word into the Trie
+
             insert(word) {
                 let cur = this.root;
                 for (let c of word) {
@@ -37,7 +37,7 @@
                 cur.endOfWord = true;
             }
 
-            // Searches for a complete word in the Trie
+
             search(word) {
                 let cur = this.root;
                 for (let c of word) {
