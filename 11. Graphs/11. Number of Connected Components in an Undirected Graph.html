@@ -46,48 +46,6 @@
             return count;
         }
 
-
-        
-
-        // Method: 2
-        class Solution {
-            countComponents(n, edges) {
-                // Step 1: Build adjacency list
-                const graph = Array.from({length: n}, () => []);
-
-                for (let [u, v] of edges) {
-                    graph[u].push(v);
-                    graph[v].push(u);
-                }
-
-                const visited = new Set();
-                
-                let count = 0;
-
-                const dfs = (node) => {
-
-                    if (visited.has(node)) return;
-
-                    visited.add(node);
-
-                    for (let neighbor of graph[node]) {
-                        dfs(neighbor);
-                    }   
-                };
-
-                // Step 2: Traverse all nodes
-                for (let i = 0; i < n; i++) {
-                    if (!visited.has(i)) {
-                        dfs(i);
-                        count++;
-                    }
-                }
-
-                return count;
-            }
-        }
-
-
         n = 3; edges = [[0, 1], [0, 2]];
         const solution = new Solution();
         const result = solution.countComponents(n, edges);
