@@ -11,7 +11,9 @@
     <script>
         function findOrder(numCourses, prerequisites) {
             const preMap = new Map();
-            let cycle = new Set();
+
+            // Set to keep track of courses in the current DFS path (for cycle detection)
+            let visiting = new Set();
             let visited = new Set();
             let res = [];
 
@@ -19,22 +21,26 @@
                 preMap.set(i, []);
             }
 
-
             for (const [crs, pre] of prerequisites) {
                 preMap.get(crs).push(pre);
             }
 
-
+            // In Course Schedule II, dfs apply on each node and check one by one.
             const dfs = (crs) => {
-                if (cycle.has(crs)) {
+                // This keep track of courses in the current DFS path (for cycle detection).
+                // If the course is already in the current DFS path, we found a cycle
+                if (visiting.has(crs)) {
                     return false;
                 }
 
+                // This keeps track of courses that are fully processed.
+                // Meaning: “I already know this course and all its prerequisites can be completed without cycles.”
+                // If a course is in visited, we don’t need to DFS it again — this saves time.
                 if (visited.has(crs)) {
                     return true;
                 }
 
-                cycle.add(crs);
+                visiting.add(crs);
 
                 for (const nei of preMap.get(crs)) {
                     if (!dfs(nei)) {
@@ -42,7 +48,7 @@
                     }
                 }
 
-                cycle.delete(crs);
+                visiting.delete(crs);
                 visited.add(crs);
                 res.push(crs);
                 return true;
@@ -55,7 +61,7 @@
                 }
             }
 
-            return res;;
+            return res.reverse();
         }
 
         numCourses = 3, prerequisites = [[1, 0]];
