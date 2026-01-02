@@ -10,9 +10,13 @@
 <body>
     <script>
         function findRedundantConnection(edges) {
-            const parent = new Array(edges.length + 1).fill(0).map((_, i) => i);
+            const parent = new Array(edges.length + 1);
             const rank = new Array(edges.length + 1).fill(1);
 
+            // Initialize each node to be its own parent
+            for (let i = 1; i <= edges.length; i++) {
+                parent[i] = i;
+            }
 
             const find = (n) => {
                 while (n !== parent[n]) {
@@ -40,7 +44,7 @@
                     parent[rootU] = rootV;
                     rank[rootV] += rank[rootU];
                 }
-                
+
                 return true;
             };
 
