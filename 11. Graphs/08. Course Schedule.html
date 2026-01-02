@@ -10,7 +10,6 @@
 <body>
     <script>
         function canFinish(numCourses, prerequisites) {
-        
             const preMap = new Map();
             
             for (let i = 0; i < numCourses; i++) {
@@ -20,10 +19,8 @@
             for (let [crs, pre] of prerequisites) {
                 preMap.get(crs).push(pre);
             }
-
             
             const visiting = new Set();
-
      
             const dfs = (crs) => {
                 if (visiting.has(crs)) {
@@ -47,15 +44,12 @@
                 return true;
             };
 
-            // Try to run DFS for all courses
             for (let c = 0; c < numCourses; c++) {
                 if (!dfs(c)) {
-                    // If any course has a cycle, return false
                     return false;
                 }
             }
 
-            // All courses can be finished
             return true;
         }
 
