@@ -42,13 +42,8 @@
                     }
                 }
 
-                // After visiting all prerequisites, remove from visiting
                 visiting.delete(crs);
-
-                // Mark the course as completed by emptying its prerequisites list
                 preMap.set(crs, []);
-
-                // No cycle found for this course
                 return true;
             };
 
