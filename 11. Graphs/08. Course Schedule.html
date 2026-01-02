@@ -36,10 +36,8 @@
 
                 visiting.add(crs);
 
-                // Recursively visit all prerequisites
                 for (let pre of preMap.get(crs)) {
                     if (!dfs(pre)) {
-                        // Cycle detected in the path
                         return false;
                     }
                 }
