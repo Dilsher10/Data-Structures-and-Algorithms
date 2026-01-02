@@ -11,7 +11,7 @@
     <script>
         function canFinish(numCourses, prerequisites) {
             const preMap = new Map();
-            
+
             for (let i = 0; i < numCourses; i++) {
                 preMap.set(i, []);
             }
@@ -19,11 +19,11 @@
             for (let [crs, pre] of prerequisites) {
                 preMap.get(crs).push(pre);
             }
-            
-            const visiting = new Set();
-     
+
+            const visited = new Set();
+
             const dfs = (crs) => {
-                if (visiting.has(crs)) {
+                if (visited.has(crs)) {
                     return false;
                 }
 
@@ -31,7 +31,7 @@
                     return true;
                 }
 
-                visiting.add(crs);
+                visited.add(crs);
 
                 for (let pre of preMap.get(crs)) {
                     if (!dfs(pre)) {
@@ -39,7 +39,7 @@
                     }
                 }
 
-                visiting.delete(crs);
+                visited.delete(crs);
                 preMap.set(crs, []);
                 return true;
             };
