@@ -21,12 +21,11 @@
                 preMap.get(crs).push(pre);
             }
 
-            // Set to keep track of courses in the current DFS path (used to detect cycles)
+            
             const visiting = new Set();
 
      
             const dfs = (crs) => {
-                // If we're revisiting a course in the current path, there's a cycle
                 if (visiting.has(crs)) {
                     return false;
                 }
