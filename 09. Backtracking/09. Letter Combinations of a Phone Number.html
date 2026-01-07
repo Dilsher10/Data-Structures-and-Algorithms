@@ -11,7 +11,7 @@
     <script>
         function letterCombinations(digits) {
             if (!digits || digits.length === 0) return [];
-            let res = [];
+            const res = [];
 
             const digitToChar = {
                 2: 'abc',
@@ -30,7 +30,7 @@
                     return;
                 }
 
-                for (const ch of digitToChar[digits[i]]) {
+                for (const ch of letters) {
                     backtrack(i + 1, cur + ch);
                 }
             };
