@@ -30,6 +30,8 @@
                     return;
                 }
 
+                const letters = digitToChar[digits[i]];
+
                 for (const ch of letters) {
                     backtrack(i + 1, cur + ch);
                 }
