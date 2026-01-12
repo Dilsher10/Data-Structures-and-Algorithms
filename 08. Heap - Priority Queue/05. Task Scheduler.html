@@ -18,8 +18,8 @@
             for (const task of tasks) {
                 count[task] = (count[task] || 0) + 1;
             }
-            
-            for (const val of Object.values(count)) {
+
+            for (const val in count) {
                 maxPQ.enqueue(val);
             }
 
