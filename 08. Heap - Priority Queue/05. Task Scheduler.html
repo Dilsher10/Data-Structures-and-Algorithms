@@ -20,7 +20,7 @@
             }
 
             for (const val in count) {
-                maxPQ.enqueue(val);
+                maxPQ.enqueue(count[val]);
             }
 
             while (!maxPQ.isEmpty() || q.length > 0) {
