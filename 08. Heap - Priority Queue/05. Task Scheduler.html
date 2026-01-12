@@ -13,6 +13,7 @@
             const count = {};
             const maxPQ = new MaxPriorityQueue();
             const q = [];
+            let time = 0;
 
             for (const task of tasks) {
                 count[task] = (count[task] || 0) + 1;
@@ -23,7 +24,7 @@
                 maxPQ.enqueue(val);
             }
 
-            let time = 0;
+            
             
 
             while (!maxPQ.isEmpty() || q.length > 0) {
