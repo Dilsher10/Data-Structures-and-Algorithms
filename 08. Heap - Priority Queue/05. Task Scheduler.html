@@ -12,7 +12,8 @@
         function leastInterval(tasks, n) {
             const count = {};
             const maxPQ = new MaxPriorityQueue();
-            
+            const q = [];
+
             for (const task of tasks) {
                 count[task] = (count[task] || 0) + 1;
             }
@@ -23,7 +24,7 @@
             }
 
             let time = 0;
-            const q = [];
+            
 
             while (!maxPQ.isEmpty() || q.length > 0) {
                 time++;
