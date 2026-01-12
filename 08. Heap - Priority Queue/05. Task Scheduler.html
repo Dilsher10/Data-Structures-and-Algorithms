@@ -11,11 +11,13 @@
     <script>
         function leastInterval(tasks, n) {
             const count = {};
+            const maxPQ = new MaxPriorityQueue();
+            
             for (const task of tasks) {
                 count[task] = (count[task] || 0) + 1;
             }
 
-            const maxPQ = new MaxPriorityQueue();
+            
             for (const val of Object.values(count)) {
                 maxPQ.enqueue(val);
             }
