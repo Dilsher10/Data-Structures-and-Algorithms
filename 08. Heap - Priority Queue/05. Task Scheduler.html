@@ -27,7 +27,7 @@
                 time++;
 
                 if (!maxPQ.isEmpty()) {
-                    let cnt = maxPQ.dequeue() - 1;
+                    let num = maxPQ.dequeue() - 1;
                     if (cnt > 0) q.push([cnt, time + n]);
                 }
 
