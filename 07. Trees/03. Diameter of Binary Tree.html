@@ -22,8 +22,10 @@
                 const right = dfs(node.right);
 
                 // Longest path through node = left + right
+                const path = left + right;
+
                 // Track the max of these values in diameter
-                diameter = Math.max(diameter, left + right);
+                diameter = Math.max(diameter, path);
 
                 // Return height upward to parent
                 return 1 + Math.max(left, right);
