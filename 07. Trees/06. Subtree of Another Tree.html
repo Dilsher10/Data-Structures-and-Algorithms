@@ -32,6 +32,10 @@
                     return true;
                 }
 
+                if(!p || !q) {
+                    return false;
+                }
+
                 if (p && q && p.val === q.val) {
                     return (this.sameTree(p.left, q.left) && this.sameTree(p.right, q.right));
                 }
