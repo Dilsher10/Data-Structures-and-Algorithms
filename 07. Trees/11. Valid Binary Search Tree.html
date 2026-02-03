@@ -9,29 +9,20 @@
 
 <body>
     <script>
-        class Solution {
-            isValidBST(root) {
-                return this.valid(root, -Infinity, Infinity);
-            }
-
-            valid(node, left, right) {
-                if (node === null) {
+        function isValidBST(root) {
+            const dfs = (node, left, right) => {
+                if (!node) {
                     return true;
                 }
-                
-                // 5 < 4 < 7 : This is invalid. 
-                // 3 < 5 < 7 : This line ckecks that every left node less that root and every right node greater than root.
-                // If this condition is True then we go to left and right node otherwise not.
-                if (!(left < node.val && node.val < right)) {
+
+                if (node.val <= left || node.val >= right) {
                     return false;
                 }
 
-                // If upper codition is True then we check left and right node
-                return (
-                    this.valid(node.left, left, node.val) &&
-                    this.valid(node.right, node.val, right)
-                );
+                return (dfs(node.left, left, node.val) && dfs(node.right, node.val, right));
             }
+
+            return dfs(root, -Infinity, Infinity);
         }
     </script>
 </body>
