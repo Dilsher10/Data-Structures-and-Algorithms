@@ -21,8 +21,8 @@
                 }
 
                 charSet.add(s[right]);
-                let window = right - left + 1;
-                maxLength = Math.max(maxLength, length);
+                let windowSize = right - left + 1;
+                maxLength = Math.max(maxLength, windowSize);
             }
             
             return maxLength;
