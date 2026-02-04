@@ -22,6 +22,7 @@
                 s2Count[s2.charCodeAt(i) - 97]++;
             }
 
+            // Count how many characters have matching frequencies in s1Count and s2Count
             let matches = 0;
             for (let i = 0; i < 26; i++) {
                 if (s1Count[i] === s2Count[i]) {
@@ -29,29 +30,34 @@
                 }
             }
 
+            // Sliding window portion start from here
             let l = 0;
             for (let r = s1.length; r < s2.length; r++) {
                 if (matches === 26) {
                     return true;
                 }
 
+                // Add the next character at the right end of the window
                 let index = s2.charCodeAt(r) - 97;
                 s2Count[index]++;
                 if (s1Count[index] === s2Count[index]) {
-                    matches++;
+                    matches++; // the new count matches s1 count
                 } else if (s1Count[index] + 1 === s2Count[index]) {
-                    matches--;
+                    matches--; // previously matched but now it doesn’t
                 }
 
+                // Remove the character at the left end of the window
                 index = s2.charCodeAt(l) - 97;
                 s2Count[index]--;
                 if (s1Count[index] === s2Count[index]) {
-                    matches++;
+                    matches++; // after decrement, it matches s1 count
                 } else if (s1Count[index] - 1 === s2Count[index]) {
-                    matches--;
+                    matches--; // previously matched but now it doesn’t
                 }
+
                 l++;
             }
+
             return matches === 26;
         }
 
