@@ -10,6 +10,9 @@
 <body>
     <script>
         function maxProfit(prices) {
+            // Left pointer (buy day) → minimum price so far
+            // Right pointer (sell day) → current day
+
             let left = 0;   // buy day
             let maxProfit = 0;
 
