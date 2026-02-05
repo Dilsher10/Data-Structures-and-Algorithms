@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sliding Window Maximum</title>
 </head>
+
 <body>
     <script>
-        //Method: 1 Optimal. It uses indexes.
         function maxSlidingWindow(nums, k) {
-            const result = [];
-            const deque = [];  // stores indices of useful elements
-            let left = 0;
+            const output = new Array(nums.length - k + 1);
+            const q = []; // deque storing indices
+            let l = 0;
 
-            for (let right = 0; right < nums.length; right++) {
-                // Remove smaller values from the back
-                while (deque.length && nums[deque[deque.length - 1]] < nums[right]) {
-                    deque.pop();
+            for (let r = 0; r < nums.length; r++) {
+                // Maintain decreasing order
+                while (q.length && nums[q[q.length - 1]] < nums[r]) {
+                    q.pop();
                 }
 
-                // Add current index to deque
-                deque.push(right);
+                q.push(r);
 
-                // Remove the element from front if it's out of window
-                if (deque[0] < left) {
-                    deque.shift();
+                // Remove out-of-window index
+                if (q[0] < l) {
+                    q.shift();
                 }
 
-                // If we've hit window size k, record the max
-                if (right + 1 >= k) {
-                    result.push(nums[deque[0]]);
-                    left++;  // slide the window forward
+                // Window ready
+                if (r + 1 >= k) {
+                    output[l] = nums[q[0]];
+                    l++;
                 }
             }
 
-            return result;
+            return output;
         }
 
 
@@ -49,4 +49,5 @@
         console.log(maxSlidingWindow(nums, k));
     </script>
 </body>
+
 </html>
