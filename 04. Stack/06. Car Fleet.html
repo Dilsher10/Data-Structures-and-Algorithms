@@ -21,6 +21,11 @@
                 // Calculate time, and push into stack
                 stack.push((target - p) / s);
 
+                /*
+                If the stack is empty, this car forms the first fleet.
+                If this car takes longer than the fleet ahead,
+                it cannot catch up, so it forms a new fleet.
+                */
                 if (stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
                     stack.pop();
                 }
