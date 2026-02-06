@@ -11,31 +11,39 @@
     <script>
         class MinStack {
             constructor() {
+                // Main stack to hold all elements
                 this.stack = [];
+                // Min stack to hold the minimum values
                 this.minStack = [];
             }
 
-            push(val) {
-                this.stack.push(val);
-                if (this.minStack.length === 0) {
-                    this.minStack.push(val);
-                } else {
-                    this.minStack.push(
-                        Math.min(val, this.minStack[this.minStack.length - 1])
-                    );
+            push(x) {
+                // Push x to the main stack
+                this.stack.push(x);
+                // If minStack is empty or x is smaller or equal to the top of minStack, push it to minStack
+                if (this.minStack.length === 0 || x <= this.minStack[this.minStack.length - 1]) {
+                    this.minStack.push(x);
                 }
             }
 
             pop() {
-                this.stack.pop();
-                this.minStack.pop();
+                // Pop the top element from the main stack
+                if (this.stack.length > 0) {
+                    const poppedElement = this.stack.pop();
+                    // If the popped element is the same as the top of minStack, pop from minStack as well
+                    if (poppedElement === this.minStack[this.minStack.length - 1]) {
+                        this.minStack.pop();
+                    }
+                }
             }
 
             top() {
+                // Return the top element of the main stack
                 return this.stack[this.stack.length - 1];
             }
 
             getMin() {
+                // Return the top element of the minStack (which is the current minimum)
                 return this.minStack[this.minStack.length - 1];
             }
         }
