@@ -26,7 +26,7 @@
                     const [index, height] = stack.pop();
 
                     // Width = current index - start index of the popped bar
-                    const width = 
+                    const width = i - index;
                     maxArea = Math.max(maxArea, height * (i - index));
 
                     // The current bar can start where the popped bar started
