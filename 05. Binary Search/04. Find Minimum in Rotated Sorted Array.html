@@ -17,9 +17,13 @@
             while (left < right) {
                 const mid = Math.floor((left + right) / 2);
 
+                // If mid element is greater than rightmost,
+                // min is in the right half
                 if (nums[mid] > nums[right]) {
                     left = mid + 1;
-                } else {
+                } 
+                // Otherwise, min is in the left half (including mid)
+                else {
                     right = mid;
                 }
             }
