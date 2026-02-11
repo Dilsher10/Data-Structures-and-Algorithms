@@ -9,42 +9,20 @@
 
 <body>
     <script>
-        function goodNodes(root) {
-            let count = 0;
-
+       function goodNodes(root) {
             const dfs = (node, maxSoFar) => {
-                if (!node) return;
+                if (!node) return 0;
 
+                let count = 0;
                 if (node.val >= maxSoFar) {
-                    count++;
+                    count = 1;
                     maxSoFar = node.val;
                 }
 
-                dfs(node.left, maxSoFar);
-                dfs(node.right, maxSoFar);
-            };
+                count += dfs(node.left, maxSoFar);
+                count += dfs(node.right, maxSoFar);
 
-            dfs(root, root.val);
-            return count;
-        };
-
-        
-
-        function goodNodes(root) {
-            const dfs = (node, maxVal) => {
-                if (!node) return 0;
-
-                // Is this node good?
-                let good = node.val >= maxVal ? 1 : 0;
-
-                // Update max for children
-                maxVal = Math.max(maxVal, node.val);
-
-                // Count good nodes in subtrees
-                good += dfs(node.left, maxVal);
-                good += dfs(node.right, maxVal);
-
-                return good;
+                return count;
             }
 
             return dfs(root, root.val);
