@@ -24,8 +24,6 @@
             }
 
             const dfs = (node) => {
-                if (visited.has(node)) return;
-
                 visited.add(node);
 
                 for (const nei of graph.get(node)) {
