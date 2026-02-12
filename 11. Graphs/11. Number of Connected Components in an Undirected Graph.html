@@ -27,7 +27,9 @@
                 visited.add(node);
 
                 for (const nei of graph.get(node)) {
-                    dfs(nei);
+                    if(!visited.has(nei)){
+                        dfs(nei);
+                    }
                 }
             }
 
