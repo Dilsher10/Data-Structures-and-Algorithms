@@ -9,21 +9,66 @@
 
 <body>
     <script>
+        // Solution (O(n) Time, O(1) Space)
+        function numDecodings(s) {
+            if (!s || s.length === 0) return 0;
+
+            // Leading zero → invalid
+            if (s[0] === '0') return 0;
+
+            let prev2 = 1; // dp[i-2]
+            let prev1 = 1; // dp[i-1]
+
+            for (let i = 1; i < s.length; i++) {
+                let current = 0;
+
+                const oneDigit = s[i];
+                const twoDigits = s.substring(i - 1, i + 1);
+
+                // ✅ Case 1: Single digit valid (1–9)
+                if (oneDigit >= '1' && oneDigit <= '9') {
+                    current += prev1;
+                }
+
+                // ✅ Case 2: Two digits valid (10–26)
+                if (twoDigits >= "10" && twoDigits <= "26") {
+                    current += prev2;
+                }
+
+                // 🚨 If no decoding possible
+                if (current === 0) return 0;
+
+                prev2 = prev1;
+                prev1 = current;
+            }
+
+            return prev1;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         // Solution (O(n) Time, O(n) Space)
         function numDecodings(s) {
-            if (!s || s[0] === '0') {
-                return 0;
-            }
+            if (!s || s.length === 0) return 0;
 
             const n = s.length;
-            let dp = new Array(n + 1).fill(0);
 
-            // Base case: There's one way to decode an empty string.
-            dp[0] = 1;
+            // If string starts with 0 → invalid
+            if (s[0] === '0') return 0;
 
-            // Base case: If the first character is non-zero, there is one way to decode it.
-            dp[1] = s[0] !== '0' ? 1 : 0;
+            const dp = new Array(n + 1).fill(0);
+
+            dp[0] = 1; // empty string
+            dp[1] = 1; // first character already checked
 
             for (let i = 2; i <= n; i++) {
                 const oneDigit = s[i - 1];             // current digit
@@ -38,12 +83,15 @@
                 if (twoDigits >= "10" && twoDigits <= "26") {
                     dp[i] += dp[i - 2];
                 }
+
+                // 🚨 Early exit if no valid decoding
+                if (dp[i] === 0) return 0;
             }
 
             return dp[n];
-        };
+        }
 
-        console.log(numDecodings("012"));
+        console.log(numDecodings("12"));
     </script>
 </body>
 
