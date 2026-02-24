@@ -24,14 +24,16 @@
             dp[1] = s[0] !== '0' ? 1 : 0;
 
             for (let i = 2; i <= n; i++) {
-                // Check if the single digit is valid (1-9)
-                if (s[i - 1] >= '1' && s[i - 1] <= '9') {
+                const oneDigit = s[i - 1];             // current digit
+                const twoDigits = s.substring(i - 2, i); // last two digits
+
+                // ✅ Case 1: Single digit valid (1–9)
+                if (oneDigit >= '1' && oneDigit <= '9') {
                     dp[i] += dp[i - 1];
                 }
 
-                // Check if the two digits form a valid number (10-26)
-                const twoDigits = s.slice(i - 2, i);
-                if (twoDigits >= '10' && twoDigits <= '26') {
+                // ✅ Case 2: Two digits valid (10–26)
+                if (twoDigits >= "10" && twoDigits <= "26") {
                     dp[i] += dp[i - 2];
                 }
             }
@@ -39,7 +41,7 @@
             return dp[n];
         };
 
-        console.log(numDecodings("12"));
+        console.log(numDecodings("012"));
     </script>
 </body>
 
