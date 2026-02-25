@@ -9,20 +9,7 @@
 
 <body>
     <script>
-        function maxProduct(nums) {
-            let res = nums[0];
-            let curMax = 1;
-            let curMin = 1;
-
-            for (const num of nums) {
-                const tmp = curMax * num;
-                curMax = Math.max(Math.max(num * curMax, num * curMin), num);
-                curMin = Math.min(Math.min(tmp, num * curMin), num);
-                res = Math.max(res, curMax);
-            }
-
-            return res;
-        }
+        
 
         const nums = [1, 2, -3, 4];
         console.log(maxProduct(nums));
