@@ -19,7 +19,7 @@
 
             for (let i = 0; i < nums.length; i++) {
                 prefix *= nums[i];
-                suffix *= nums[ - 1 - i];
+                suffix *= nums[nums.length - 1 - i];
 
                 maxProd = Math.max(maxProd, prefix, suffix);
 
