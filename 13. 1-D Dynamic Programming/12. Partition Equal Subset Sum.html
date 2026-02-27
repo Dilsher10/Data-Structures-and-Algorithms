@@ -22,7 +22,9 @@
 
             for (let num of nums) {
                 for (let j = target; j >= num; j--) {
-                    dp[j] = dp[j] || dp[j - num];
+                    if (dp[j - num]) {
+                        dp[j] = true;
+                    }
                 }
             }
 
