@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-th Tribonacci Number</title>
+</head>
+
+<body>
+    <script>
+        function tribonacci(n) {
+            if (n <= 2) {
+                return n === 0 ? 0 : 1;
+            }
+
+            const dp = new Array(n + 1).fill(0);
+            dp[1] = dp[2] = 1;
+            for (let i = 3; i <= n; i++) {
+                dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+            }
+            return dp[n];
+        }
+    </script>
+</body>
+
+</html>
