@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combination Sum IV</title>
+</head>
+
+<body>
+    <script>
+        function combinationSum4(nums, target) {
+            const dp = new Array(target + 1).fill(0);
+            dp[0] = 1;
+
+            for (let i = 1; i <= target; i++) {
+                for (let num of nums) {
+                    if (num <= i) {
+                        dp[i] += dp[i - num];
+                    }
+                }
+            }
+
+            return dp[target];
+        }
+
+        nums = [3, 1, 2], target = 4
+        console.log(combinationSum4(nums, target));    
+    </script>
+</body>
+
+</html>
