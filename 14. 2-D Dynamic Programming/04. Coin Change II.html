@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Coin Change II</title>
 </head>
+
 <body>
     <script>
-        
+        function change(amount, coins) {
+            const dp = new Array(amount + 1).fill(0);
+
+            // Base case: 1 way to make amount 0 (choose nothing)
+            dp[0] = 1;
+
+            // Loop over coins first (IMPORTANT → avoids permutations)
+            for (let coin of coins) {
+                for (let i = coin; i <= amount; i++) {
+                    dp[i] += dp[i - coin];
+                }
+            }
+
+            return dp[amount];
+        }
     </script>
 </body>
+
 </html>
