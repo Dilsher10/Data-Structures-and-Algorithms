@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        
+        function findTargetSumWays(nums, target) {
+            const total = nums.reduce((a, b) => a + b, 0);
+
+            // Edge cases
+            if ((target + total) % 2 !== 0 || Math.abs(target) > total) {
+                return 0;
+            }
+
+            const subsetSum = (target + total) / 2;
+
+            // DP array
+            const dp = new Array(subsetSum + 1).fill(0);
+            dp[0] = 1;
+
+            for (let num of nums) {
+                for (let s = subsetSum; s >= num; s--) {
+                    dp[s] += dp[s - num];
+                }
+            }
+
+            return dp[subsetSum];
+        }
+
+        nums = [2, 2, 2], target = 2
+        console.log(findTargetSumWays(nums, target));
     </script>
 </body>
+
 </html>
