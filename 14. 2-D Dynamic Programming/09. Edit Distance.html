@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Distance</title>
+</head>
+
+<body>
+    <script>
+        function minDistance(word1, word2) {
+            const m = word1.length;
+            const n = word2.length;
+
+            const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+            // Base cases
+            //delete all characters
+            for (let i = 0; i <= m; i++) {
+                dp[i][0] = i;
+            };
+
+            // insert all characters
+            for (let j = 0; j <= n; j++) {
+                dp[0][j] = j;
+            }
+
+            // Fill DP table
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    if (word1[i - 1] === word2[j - 1]) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                    } else {
+                        dp[i][j] = 1 + Math.min(
+                            dp[i - 1][j],     // delete
+                            dp[i][j - 1],     // insert
+                            dp[i - 1][j - 1]  // replace
+                        );
+                    }
+                }
+            }
+
+            return dp[m][n];
+        }
+
+        word1 = "monkeys", word2 = "money"
+        console.log(minDistance(word1, word2));
+    </script>
+</body>
+
+</html>
