@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Burst Balloons</title>
 </head>
+
 <body>
     <script>
+        function maxCoins(nums) {
+            // Add virtual balloons
+            nums = [1, ...nums, 1];
+            const n = nums.length;
 
+            // Create DP table
+            const dp = Array.from({ length: n }, () => Array(n).fill(0));
+
+            // length = distance between left and right
+            for (let length = 2; length < n; length++) {
+                for (let left = 0; left < n - length; left++) {
+                    const right = left + length;
+
+                    for (let k = left + 1; k < right; k++) {
+                        const coins =
+                            nums[left] * nums[k] * nums[right] +
+                            dp[left][k] +
+                            dp[k][right];
+
+                        dp[left][right] = Math.max(dp[left][right], coins);
+                    }
+                }
+            }
+
+            return dp[0][n - 1];
+        }
+
+        nums = [4, 2, 3, 7];
+        console.log(maxCoins(nums));
     </script>
 </body>
+
 </html>
