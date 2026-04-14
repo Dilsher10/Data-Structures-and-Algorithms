@@ -9,6 +9,36 @@
 
 <body>
     <script>
+        // 2DP
+        function change(amount, coins) {
+            const n = coins.length;
+
+            const dp = Array.from({ length: n + 1 }, () => Array(amount + 1).fill(0));
+
+            // Base case
+            for (let i = 0; i <= n; i++) {
+                dp[i][0] = 1;
+            }
+
+            for (let i = 1; i <= n; i++) {
+                const coin = coins[i - 1];
+
+                for (let j = 1; j <= amount; j++) {
+                    // Not take the coin
+                    dp[i][j] = dp[i - 1][j];
+
+                    // Take the coin (if possible)
+                    if (j >= coin) {
+                        dp[i][j] += dp[i][j - coin];
+                    }
+                }
+            }
+
+            return dp[n][amount];
+        }
+
+
+        // 1 DP
         function change(amount, coins) {
             const dp = new Array(amount + 1).fill(0);
 
