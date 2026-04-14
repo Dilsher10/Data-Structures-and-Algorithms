@@ -18,9 +18,9 @@
             dp[0][0] = true;
 
             // Handle patterns like a*, a*b*, etc in first row.
-            for (let j = 2; j <= n; j++) {
-                if (p[j - 1] === '*') {
-                    dp[0][j] = dp[0][j - 2];
+            for (let i = 2; i <= n; i++) {
+                if (p[i - 1] === '*') {
+                    dp[0][i] = dp[0][i - 2];
                 }
             }
 
