@@ -20,15 +20,17 @@
             dp[0][0] = true;
 
             // fill first column (only s1)
-             for (let i = 1; i <= m; i++) {
+            for (let i = 1; i <= m; i++) {
                 if (s1[i - 1] === s3[i - 1] && dp[i - 1][0]) {
                     dp[i][0] = true;
                 }
             }
 
             // fill first row (only s2)
-            for (let j = 1; j <= n; j++) {
-                dp[0][j] = dp[0][j - 1] && s2[j - 1] === s3[j - 1];
+            for (let i = 1; i <= n; i++) {
+                if (s2[i - 1] === s3[i - 1] && dp[0][i - 1]) {
+                    dp[0][i] = true;
+                }
             }
 
             // fill rest of dp table
