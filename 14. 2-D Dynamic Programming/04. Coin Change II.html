@@ -9,7 +9,7 @@
 
 <body>
     <script>
-        // 2DP
+        // 2 DP
         function change(amount, coins) {
             const n = coins.length;
 
@@ -21,15 +21,11 @@
             }
 
             for (let i = 1; i <= n; i++) {
-                const coin = coins[i - 1];
-
                 for (let j = 1; j <= amount; j++) {
-                    // Not take the coin
-                    dp[i][j] = dp[i - 1][j];
-
-                    // Take the coin (if possible)
-                    if (j >= coin) {
-                        dp[i][j] += dp[i][j - coin];
+                    if (coins[i - 1] <= j) {
+                        dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]];   // Take the coin
+                    } else {
+                        dp[i][j] = dp[i - 1][j];    // Not take the coin
                     }
                 }
             }
