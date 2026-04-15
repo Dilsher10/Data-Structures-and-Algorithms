@@ -13,43 +13,39 @@
             const m = s1.length;
             const n = s2.length;
 
-            // Length check
             if (m + n !== s3.length) return false;
 
-            // Create DP table
             const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(false));
 
             dp[0][0] = true;
 
-            for (let i = 0; i <= m; i++) {
-                for (let j = 0; j <= n; j++) {
+            // fill first column (only s1)
+             for (let i = 1; i <= m; i++) {
+                if (s1[i - 1] === s3[i - 1] && dp[i - 1][0]) {
+                    dp[i][0] = true;
+                }
+            }
 
-                    // Case 1: take from s1
-                    if (i > 0) {
-                        const fromTop = dp[i - 1][j];                 // previous state (take from s1)
-                        const charFromS1 = s1[i - 1];                 // current char in s1
-                        const charFromS3 = s3[i + j - 1];             // corresponding char in s3
+            // fill first row (only s2)
+            for (let j = 1; j <= n; j++) {
+                dp[0][j] = dp[0][j - 1] && s2[j - 1] === s3[j - 1];
+            }
 
-                        if (fromTop && charFromS1 === charFromS3) {
-                            dp[i][j] = true;
-                        }
+            // fill rest of dp table
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    if (s1[i - 1] === s3[i + j - 1] && dp[i - 1][j]) {
+                        dp[i][j] = true;
                     }
 
-                    // Case 2: take from s2
-                    if (j > 0) {
-                        const fromLeft = dp[i][j - 1];                // previous state (take from s2)
-                        const charFromS2 = s2[j - 1];                 // current char in s2
-                        const charFromS3 = s3[i + j - 1];             // same position in s3
-
-                        if (fromLeft && charFromS2 === charFromS3) {
-                            dp[i][j] = true;
-                        }
+                    if (s2[j - 1] === s3[i + j - 1] && dp[i][j - 1]) {
+                        dp[i][j] = true;
                     }
                 }
             }
 
             return dp[m][n];
-        }
+        };
 
         s1 = "aaaa", s2 = "bbbb", s3 = "aabbbbaa"
         console.log(isInterleave(s1, s2, s3));
