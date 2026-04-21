@@ -15,6 +15,7 @@
 
             for (let i = 3; i <= n; i++) {
                 for (let j = 1; j < i; j++) {
+<<<<<<< HEAD
                     dp[i] = Math.max(
                         dp[i],
                         j * (i - j),     // direct split
@@ -32,3 +33,18 @@
 </body>
 
 </html>
+=======
+                    dp[i] = Math.max(dp[i], j * (i - j), j * dp[i - j]);
+                }
+            }
+
+            return dp[n];
+        }
+
+        n = 12;
+        console.log(integerBreak(n));
+    </script>
+</body>
+
+</html>
+>>>>>>> 279227f776cfef94fc68700ce8cd0ad1f15a4ac8
