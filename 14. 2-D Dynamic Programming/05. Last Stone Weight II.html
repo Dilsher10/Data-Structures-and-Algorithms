@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last Stone Weight II</title>
+</head>
+
+<body>
+    <script>
+        function lastStoneWeightII(stones) {
+            const n = stones.length;
+            const total = stones.reduce((a, b) => a + b, 0);
+            const target = Math.floor(total / 2);
+
+            const dp = Array.from({ length: n + 1 }, () =>
+                new Array(target + 1).fill(false)
+            );
+
+            dp[0][0] = true;
+
+            for (let i = 1; i <= n; i++) {
+                const stone = stones[i - 1];
+                for (let j = 0; j <= target; j++) {
+                    // not take
+                    dp[i][j] = dp[i - 1][j];
+
+                    // take
+                    if (j >= stone) {
+                        dp[i][j] = dp[i][j] || dp[i - 1][j - stone];
+                    }
+                }
+            }
+
+            for (let j = target; j >= 0; j--) {
+                if (dp[n][j]) {
+                    return total - 2 * j;
+                }
+            }
+        }
+
+        stones = [2, 4, 1, 5, 6, 3];
+        console.log(lastStoneWeightII(stones));
+    </script>
+</body>
+
+</html>
