@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stone Game II</title>
+</head>
+
+<body>
+    <script>
+        function stoneGameII(piles) {
+            const n = piles.length;
+
+            // suffix sum
+            const suffix = Array(n + 1).fill(0);
+            for (let i = n - 1; i >= 0; i--) {
+                suffix[i] = suffix[i + 1] + piles[i];
+            }
+
+            const dp = Array.from({ length: n }, () =>
+                Array(n + 1).fill(-1)
+            );
+
+            function dfs(i, M) {
+                if (i >= n) return 0;
+
+                if (dp[i][M] !== -1) return dp[i][M];
+
+                let maxStones = 0;
+
+                for (let X = 1; X <= 2 * M && i + X <= n; X++) {
+                    const opponent = dfs(i + X, Math.max(M, X));
+                    const current = suffix[i] - opponent;
+
+                    maxStones = Math.max(maxStones, current);
+                }
+
+                dp[i][M] = maxStones;
+                return maxStones;
+            }
+
+            return dfs(0, 1);
+        }
+
+        piles = [3, 1, 2, 5, 7];
+        console.log(stoneGameII(piles));
+    </script>
+</body>
+
+</html>
