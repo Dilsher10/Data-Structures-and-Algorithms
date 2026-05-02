@@ -15,7 +15,7 @@
 
             for (let i = 1; i <= target; i++) {
                 for (let num of nums) {
-                    if (num <= i) {
+                    if (i >= num) {
                         dp[i] += dp[i - num];
                     }
                 }
